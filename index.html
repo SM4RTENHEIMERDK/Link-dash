@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mit Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- PWA Setup -->
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icon.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#007AFF">
+</head>
+
+<body>
+    <div class="app-container">
+        <header>
+            <h1>Mit Dashboard</h1>
+            <button id="edit-toggle-btn" class="text-btn">Rediger</button>
+        </header>
+
+        <main>
+            <div id="dashboard-grid" class="grid-container">
+                <!-- Links will be injected here by JS -->
+            </div>
+        </main>
+
+        <div class="fab-container">
+            <button id="add-btn" class="fab">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 5V19M5 12H19" stroke="white" stroke-width="3" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal for Add/Edit -->
+    <div id="modal-overlay" class="modal-overlay hidden">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 id="modal-title">Ny Knap</h2>
+            </div>
+            <div class="modal-body">
+                <div class="input-group">
+                    <label for="link-title">Titel (f.eks. Time-skema)</label>
+                    <input type="text" id="link-title" placeholder="Indtast titel">
+                </div>
+                <div class="input-group">
+                    <label for="link-url">URL (link til Monday)</label>
+                    <input type="url" id="link-url" placeholder="https://...">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="cancel-btn" class="btn secondary">Annuller</button>
+                <button id="save-btn" class="btn primary" disabled>Gem</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('./sw.js')
+                .then(reg => console.log('Service Worker Registered'))
+                .catch(err => console.log('Service Worker Failed', err));
+        }
+    </script>
+</body>
+
+</html>
